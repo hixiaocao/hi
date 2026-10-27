@@ -1,0 +1,621 @@
+/* ============================================================================
+ *  custom.css —— 在原始主题之上的样式增强
+ *  （想微调配色，改下面 :root 里的变量即可）
+ * ========================================================================== */
+
+:root {
+    --accent: #c0e3e7;
+    --accent-deep: #79c7d4;
+    --accent-ink: #2a5b63;
+    --ink: #2a2a2a;
+    --muted: #757575;
+    --line: #eef2f3;
+    --radius: 16px;
+    --shadow-sm: 0 4px 14px rgba(20, 40, 50, 0.06);
+    --shadow-md: 0 16px 34px rgba(20, 40, 50, 0.12);
+    --ease: cubic-bezier(0.22, 0.72, 0.3, 1);
+}
+
+/* ------------------------------------------------------------------ 背景 */
+body {
+    background:
+        radial-gradient(1100px 560px at 8% -5%, #e9f7f9 0%, rgba(233, 247, 249, 0) 60%),
+        radial-gradient(900px 520px at 105% 10%, #f2f9f0 0%, rgba(242, 249, 240, 0) 55%),
+        #f3f5f6;
+    background-attachment: fixed;
+}
+
+#ace-bg-shape-1 {
+    animation: floatShape 14s ease-in-out infinite;
+}
+
+#ace-bg-shape-2 {
+    animation: floatShape 18s ease-in-out infinite reverse;
+}
+
+/* ------------------------------------------------------- 纸张 / 名片 */
+.ace-paper {
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+#ace-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+
+#ace-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+#ace-card h1 {
+    letter-spacing: 0.06em;
+}
+
+/* 头像外圈：缓慢旋转的渐变环 */
+.avatar-ring {
+    display: inline-block;
+    position: relative;
+    padding: 6px;
+    border-radius: 50%;
+}
+
+.avatar-ring::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, var(--accent), #ffffff, var(--accent-deep), #ffffff, var(--accent));
+    animation: avatarSpin 8s linear infinite;
+}
+
+.avatar-ring img {
+    position: relative;
+    z-index: 1;
+    display: block;
+    border: 4px solid #fff;
+    background: #fff;
+    transition: transform 0.4s var(--ease);
+}
+
+.avatar-ring:hover img {
+    transform: scale(1.03) rotate(-2deg);
+}
+
+/* 社交图标 */
+.ace-social .ace-icon {
+    transition: transform 0.3s var(--ease), color 0.3s;
+}
+
+.ace-social a:hover .ace-icon {
+    color: var(--accent-deep);
+    transform: translateY(-3px) scale(1.15);
+}
+
+/* ------------------------------------------------------------- 右侧导航 */
+#ace-nav-wrap .ace-nav li a {
+    display: block;
+    transition: transform 0.28s var(--ease), opacity 0.28s;
+}
+
+#ace-nav-wrap .ace-nav li a:hover {
+    opacity: 1;
+    transform: translateX(-4px) scale(1.08);
+}
+
+#ace-nav-wrap .ace-nav .ace-icon {
+    transition: color 0.28s, text-shadow 0.28s;
+}
+
+#ace-nav-wrap .ace-nav li a:hover .ace-icon,
+#ace-nav-wrap .ace-nav li.active a .ace-icon {
+    color: var(--accent-deep);
+    text-shadow: 0 0 14px rgba(121, 199, 212, 0.65);
+}
+
+#ace-nav-wrap .ace-nav li.active a {
+    opacity: 1;
+}
+
+.nav-home img {
+    transition: transform 0.35s var(--ease);
+}
+
+.nav-home:hover img {
+    transform: rotate(18deg) scale(1.06);
+}
+
+/* ---------------------------------------------------------- 滚动进入动画 */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.65s ease, transform 0.65s var(--ease);
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+.reveal-item {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s var(--ease);
+}
+
+.reveal.is-visible .reveal-item {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(var(--i, 0) * 70ms);
+}
+
+section[id] {
+    scroll-margin-top: 28px;
+}
+
+/* ------------------------------------------------------------ 板块标题 */
+.section .title-thin {
+    position: relative;
+    padding-bottom: 6px;
+}
+
+.section .title-thin::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 44px;
+    height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--accent-deep), var(--accent));
+    transition: width 0.45s var(--ease);
+}
+
+.section:hover .title-thin::after {
+    width: 76px;
+}
+
+/* ------------------------------------------------------------ 技能圆点 */
+.progress-bullets {
+    transition: transform 0.3s var(--ease);
+}
+
+.progress-bullets .bullet {
+    transition: transform 0.3s var(--ease), background-color 0.3s, box-shadow 0.3s;
+}
+
+.progress-bullets:hover .bullet.fill {
+    background-color: var(--accent-deep);
+    box-shadow: 0 0 10px rgba(121, 199, 212, 0.6);
+}
+
+.progress-bullets:hover .bullet.fill:nth-child(odd) {
+    transform: scale(1.22);
+}
+
+.progress-bullets:hover .bullet.fill:nth-child(even) {
+    transform: scale(1.1);
+}
+
+.progress-bullets:hover .progress-title {
+    color: var(--accent-ink);
+}
+
+/* 逐点弹出的入场动画 */
+.reveal.is-visible .progress-bullets .bullet {
+    animation: bulletIn 0.35s var(--ease) backwards;
+}
+
+.reveal.is-visible .progress-bullets .bullet:nth-child(1) { animation-delay: 0ms; }
+.reveal.is-visible .progress-bullets .bullet:nth-child(2) { animation-delay: 40ms; }
+.reveal.is-visible .progress-bullets .bullet:nth-child(3) { animation-delay: 80ms; }
+.reveal.is-visible .progress-bullets .bullet:nth-child(4) { animation-delay: 120ms; }
+.reveal.is-visible .progress-bullets .bullet:nth-child(5) { animation-delay: 160ms; }
+.reveal.is-visible .progress-bullets .bullet:nth-child(6) { animation-delay: 200ms; }
+.reveal.is-visible .progress-bullets .bullet:nth-child(7) { animation-delay: 240ms; }
+.reveal.is-visible .progress-bullets .bullet:nth-child(8) { animation-delay: 280ms; }
+.reveal.is-visible .progress-bullets .bullet:nth-child(9) { animation-delay: 320ms; }
+.reveal.is-visible .progress-bullets .bullet:nth-child(10) { animation-delay: 360ms; }
+
+/* ------------------------------------------------------------ 教育经历 */
+.ref-box {
+    border-radius: 12px;
+    padding-left: 70px;
+    padding-right: 18px;
+    padding-top: 12px;
+    transition: background-color 0.3s, transform 0.3s var(--ease);
+}
+
+.ref-box:hover {
+    background-color: #f7fbfc;
+    transform: translateX(4px);
+}
+
+.ref-avatar img {
+    transition: transform 0.35s var(--ease), box-shadow 0.35s;
+}
+
+.ref-box:hover .ref-avatar img {
+    transform: scale(1.08);
+    box-shadow: 0 8px 18px rgba(20, 40, 50, 0.16);
+}
+
+/* ------------------------------------------------------------ 工作经历 */
+.education-box {
+    transition: transform 0.3s var(--ease);
+}
+
+.education-box:hover {
+    transform: translateX(4px);
+}
+
+.education-box::before {
+    background: var(--accent-deep) !important;
+    box-shadow: 0 0 0 4px rgba(192, 227, 231, 0.55);
+    animation: dotPulse 2.4s ease-in-out infinite;
+}
+
+.education-date {
+    border-radius: 999px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.education-box:hover .education-date {
+    background: var(--accent-deep);
+    box-shadow: 0 6px 14px rgba(121, 199, 212, 0.4);
+}
+
+.education-company {
+    color: var(--muted);
+}
+
+/* ------------------------------------------------------------ 证书 */
+.award-box {
+    border-radius: 12px;
+    padding: 12px;
+    transition: transform 0.35s var(--ease), box-shadow 0.35s, background-color 0.35s;
+}
+
+.award-box:hover {
+    transform: translateY(-6px);
+    background-color: #f7fbfc;
+    box-shadow: var(--shadow-sm);
+}
+
+.award-img img {
+    transition: transform 0.4s var(--ease);
+}
+
+.award-box:hover .award-img img {
+    transform: scale(1.05) rotate(-1.5deg);
+}
+
+/* ------------------------------------------------------------ 作品 */
+.portfolio-figure img {
+    transition: transform 0.6s var(--ease);
+}
+
+.project:hover .portfolio-figure img {
+    transform: scale(1.06);
+}
+
+.project {
+    border-radius: 12px;
+}
+
+.pf-grid-item {
+    padding: 0 6px 12px;
+}
+
+/* ------------------------------------------------------------ 按钮 */
+.btn {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.28s var(--ease), box-shadow 0.28s, filter 0.28s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(20, 40, 50, 0.16);
+    filter: saturate(1.15);
+}
+
+.btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+    transform: skewX(-18deg);
+    transition: left 0.6s var(--ease);
+}
+
+.btn:hover::after {
+    left: 130%;
+}
+
+/* ====================================================================== */
+/*  小组件：当前时间 / 今日幸运数字                                        */
+/* ====================================================================== */
+
+.widget-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 36px;
+}
+
+.widget {
+    position: relative;
+    overflow: hidden;
+    padding: 20px 22px 22px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fff;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.35s var(--ease), box-shadow 0.35s;
+}
+
+.widget::after {
+    content: "";
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(192, 227, 231, 0.7), rgba(192, 227, 231, 0) 70%);
+    transition: transform 0.6s var(--ease);
+}
+
+.widget:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.widget:hover::after {
+    transform: scale(1.25);
+}
+
+.widget-head {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 14px;
+    font-size: 0.75em;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.widget-head .ace-icon {
+    color: var(--accent-deep);
+    font-size: 1.2em;
+}
+
+/* 时钟 */
+.clock-time {
+    position: relative;
+    z-index: 1;
+    font-size: 2.05em;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: 0.03em;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+}
+
+.clock-date {
+    position: relative;
+    z-index: 1;
+    margin-top: 6px;
+    font-size: 0.82em;
+    color: var(--muted);
+}
+
+.clock-progress {
+    position: relative;
+    z-index: 1;
+    margin-top: 16px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--line);
+    overflow: hidden;
+}
+
+.clock-progress span {
+    display: block;
+    width: 0;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent-deep), var(--accent));
+    transition: width 0.6s ease;
+}
+
+/* 幸运数字 */
+.lucky-digits {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 8px;
+}
+
+.lucky-digits span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 46px;
+    border: 1px solid #dff0f3;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #f9fdfe, #e9f5f7);
+    color: var(--accent-ink);
+    font-size: 1.5em;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    transition: transform 0.3s var(--ease), box-shadow 0.3s;
+}
+
+.lucky-digits span:hover {
+    transform: translateY(-5px) rotate(-4deg);
+    box-shadow: 0 8px 16px rgba(121, 199, 212, 0.4);
+}
+
+.lucky-digits span.settling {
+    animation: luckyPop 0.45s var(--ease);
+}
+
+.lucky-meta {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    font-size: 0.82em;
+    color: var(--muted);
+    min-height: 1.4em;
+}
+
+.lucky-label {
+    letter-spacing: 0.1em;
+}
+
+.lucky-color {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px var(--line), 0 2px 6px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s var(--ease);
+}
+
+.widget-lucky:hover .lucky-color {
+    transform: scale(1.25);
+}
+
+/* ====================================================================== */
+/*  动画关键帧                                                             */
+/* ====================================================================== */
+
+.noscript-tip {
+    margin: 40px auto;
+    max-width: 520px;
+    padding: 18px 22px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+    color: var(--muted);
+    font-size: 0.9em;
+    text-align: center;
+}
+
+@keyframes avatarSpin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes floatShape {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+}
+
+@keyframes dotPulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(192, 227, 231, 0.55); }
+    50% { box-shadow: 0 0 0 7px rgba(192, 227, 231, 0.15); }
+}
+
+@keyframes bulletIn {
+    from {
+        opacity: 0;
+        transform: scale(0.2);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes luckyPop {
+    0% { transform: scale(1); }
+    45% { transform: scale(1.18) translateY(-4px); }
+    100% { transform: scale(1); }
+}
+
+/* ====================================================================== */
+/*  响应式                                                                 */
+/* ====================================================================== */
+
+@media (max-width: 767px) {
+    .widget-strip {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-bottom: 26px;
+    }
+
+    .clock-time {
+        font-size: 1.8em;
+    }
+
+    .lucky-digits span {
+        width: 34px;
+        height: 42px;
+        font-size: 1.3em;
+    }
+
+    .ref-box {
+        padding-left: 62px;
+    }
+}
+
+/* ====================================================================== */
+/*  可访问性 & 打印                                                        */
+/* ====================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+
+    .reveal,
+    .reveal-item {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+@media print {
+    #ace-nav-wrap,
+    #widget-strip,
+    .ace-card-footer,
+    #ace-footer,
+    #ace-bg-shape-1,
+    #ace-bg-shape-2 {
+        display: none !important;
+    }
+
+    body {
+        background: #fff !important;
+    }
+
+    .ace-paper {
+        box-shadow: none;
+    }
+
+    .reveal,
+    .reveal-item {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}

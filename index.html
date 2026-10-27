@@ -1,75 +1,110 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="zh-CN" class="ace ace-card-on ace-tab-nav-on ace-main-nav-on ace-sidebar-on" data-theme-color="#c0e3e7">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="个人主页">
+    <title>个人主页</title>
 
-<div id="ace-content" class="ace-container-shift">
-    <div class="ace-container">
-        <div id="ace-nav-wrap" class="hidden-sm hidden-xs">
-            <div class="ace-nav-cont">
-                <div id="ace-nav-scroll">
-                    <nav id="ace-nav" class="ace-nav">
-                        <ul class="clear-list">
-                            <li>
-                              <a href="index.html" data-tooltip="Home"><img class="avatar avatar-42" src="{{ '/styles/img/show-star.png' | prepend: site.baseurl }}" alt=""></a>
-                            </li>
-                            <li>
-                              <a href="#basic_info" data-tooltip="基本信息"><span class="ace-icon ace-icon-home"></span></a>
-                            </li>
-                            <li>
-                              <a href="#profetional" data-tooltip="职业技能"><span class="ace-icon ace-icon-experience"></span></a>
-                            </li>
+    <!-- Icon Fonts -->
+    <link href="styles/fonts/icomoon/style.css" rel="stylesheet">
 
-                            <li>
-                              <a href="#education" data-tooltip="教育经历"><span class="ace-icon ace-icon-portfolio"></span></a>
-                            </li>
-                            
-                            <li>
-                              <a href="#experience" data-tooltip="工作经历"><span class="ace-icon ace-icon-references"></span></a>
-                            </li>
-                            <li>
-                              <a href="#certification" data-tooltip="获得证书"><span class="ace-icon ace-icon-blog"></span></a>
-                            </li>
-                            <li>
-                              <a href="#personal_project" data-tooltip="个人作品"><span class="ace-icon ace-icon-snowflake-o"></span></a>
-                            </li>
-                        </ul>
-                    </nav>
+    <!-- Styles -->
+    <link href="styles/js/plugins/highlight/solarized-light.css" rel="stylesheet">
+    <link href="styles/css/style.css" rel="stylesheet">
+    <link href="styles/css/custom.css" rel="stylesheet">
+
+    <!-- Modernizer -->
+    <script src="styles/js/vendor/modernizr-3.3.1.min.js"></script>
+</head>
+<body id="top">
+
+<div class="ace-wrapper">
+
+    <noscript>
+        <div class="noscript-tip">本页内容由 config.js 动态渲染，请启用 JavaScript 后查看。</div>
+    </noscript>
+
+    <header id="ace-header" class="ace-container-shift ace-logo-in ace-head-boxed ace-nav-right">
+        <div class="ace-head-inner"></div>
+    </header>
+
+    <!-- 个人名片：内容来自 config.js -->
+    <div id="personal-card"></div>
+
+    <div id="ace-content" class="ace-container-shift">
+        <div class="ace-container">
+
+            <!-- 右侧导航（导航项由 config.js 的 sections 自动生成） -->
+            <div id="ace-nav-wrap" class="hidden-sm hidden-xs">
+                <div class="ace-nav-cont">
+                    <div id="ace-nav-scroll">
+                        <nav id="ace-nav" class="ace-nav">
+                            <ul class="clear-list" id="ace-nav-list"></ul>
+                        </nav>
+                    </div>
+
+                    <div id="ace-nav-tools" class="hidden">
+                        <span class="ace-icon ace-icon-dots-three-horizontal"></span>
+                        <button id="ace-nav-arrow" class="clear-btn">
+                            <span class="ace-icon ace-icon-chevron-thin-down"></span>
+                        </button>
+                    </div>
                 </div>
+            </div><!-- .ace-nav-wrap -->
 
-                <div id="ace-nav-tools" class="hidden">
-                    <span class="ace-icon ace-icon-dots-three-horizontal"></span>
+            <div class="ace-paper-stock">
+                <main class="ace-paper clearfix">
+                    <div class="ace-paper-cont clear-mrg">
+                        <!-- START: PAGE CONTENT -->
+                        <div class="padd-box clear-mrg">
 
-                    <button id="ace-nav-arrow" class="clear-btn">
-                        <span class="ace-icon ace-icon-chevron-thin-down"></span>
-                    </button>
-                </div>
-            </div>
+                            <!-- 娱乐小组件：当前时间 / 今日幸运数字 -->
+                            <div id="widget-strip" class="widget-strip"></div>
 
-            <!-- <div class="ace-nav-btm"></div> -->
-        </div><!-- .ace-nav-wrap -->
+                            <!-- 简历各板块：内容与顺序来自 config.js -->
+                            <div id="resume-sections"></div>
 
-        <div class="ace-paper-stock">
-            <main class="ace-paper clearfix">
-                <div class="ace-paper-cont clear-mrg">
-                    <!-- START: PAGE CONTENT -->
-                    <div class="padd-box clear-mrg">
+                        </div><!-- .padd-box -->
+                        <!-- END: PAGE CONTENT -->
+                    </div><!-- .ace-paper-cont -->
+                </main><!-- .ace-paper -->
+            </div><!-- .ace-paper-stock -->
 
-                    {% include resumer_01-basic.html %}
+        </div><!-- .ace-container -->
+    </div><!-- #ace-content -->
 
-                    {% include resumer_02-profetional.html %}
+    <footer id="ace-footer" class="ace-container-shift">
+        <div class="ace-container">
+            <div class="ace-footer-cont clear-mrg" id="ace-footer-cont"></div>
+        </div><!-- .ace-container -->
+    </footer><!-- #ace-footer -->
 
-                    {% include resumer_03-education.html %}
+    <!-- Triangle Shapes -->
+    <svg id="ace-bg-shape-1" class="hidden-sm hidden-xs" height="519" width="758">
+        <polygon points="0,455,693,352,173,0,92,0,0,71" style="fill:#d2d2d2;stroke:purple;stroke-width:0; opacity: 0.5"></polygon>
+    </svg>
 
-                    {% include resumer_04-experience.html %}
+    <svg id="ace-bg-shape-2" class="hidden-sm hidden-xs" height="536" width="633">
+        <polygon points="0,0,633,0,633,536" style="fill:#c0e3e7;stroke:purple;stroke-width:0"></polygon>
+    </svg>
 
-                    {% include resumer_05-certification.html %}
+</div><!-- .ace-wrapper -->
 
-                    {% include resumer_06-personal_project.html %}
-                        
-                    </div><!-- .padd-box -->
-                <!-- END: PAGE CONTENT -->
-                </div><!-- .ace-paper-cont -->
-            </main><!-- .ace-paper -->
-        </div><!-- .ace-paper-stock -->
-    </div><!-- .ace-container -->
-</div><!-- #ace-content -->
+<!-- Scripts -->
+<script src="styles/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="config.js"></script>
+<script src="styles/js/render.js"></script>
+
+<script src="styles/js/plugins/highlight/highlight.pack.js"></script>
+<script src="styles/js/plugins/jquery.mCustomScrollbar.min.js"></script>
+<script src="styles/js/plugins/isotope.pkgd.min.js"></script>
+<script src="styles/js/plugins/progressbar.min.js"></script>
+<script src="styles/js/plugins/slick.min.js"></script>
+
+<script src="styles/js/options.js"></script>
+<script src="styles/js/main.js"></script>
+
+</body>
+</html>
